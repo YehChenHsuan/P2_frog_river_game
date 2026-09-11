@@ -1,9 +1,10 @@
 /**
  * ALICE ESL Phonics P2 - 萌蛙過河單字大冒險題庫核心資料 (data.js)
- * 課本學習範圍：Page 04 - 10
+ * 課本學習範圍：Page 04 - 09
  * 主題：Daily Activities, Beginning Sounds & Short Vowels
  */
 
+window.BOOK_ID = "P2";
 const P2_VOCABULARY = [
   {
     "id": "Ted",
@@ -465,14 +466,12 @@ const PHONICS_GROUPS = {
     "truck",
     "take",
     "town",
-    "toe",
     "toes",
     "ten"
   ],
   "Mm": [
     "man",
     "mom",
-    "mop",
     "money",
     "mouse",
     "milk",
@@ -491,34 +490,9 @@ const PHONICS_GROUPS = {
 // 課文動作問答情境題庫
 const ANIMAL_ACTION_QUESTIONS = [
   {
-    "subject": "Josh",
-    "action": "wake up",
-    "sentence": "Josh can wake up early!",
-    "question": "What does Josh do in the morning?",
-    "options": [
-      "wake up",
-      "sleep",
-      "cry"
-    ],
-    "correct": "wake up"
-  },
-  {
-    "subject": "Girl",
-    "action": "wash",
-    "sentence": "I wash my face every morning.",
-    "question": "What does she wash?",
-    "options": [
-      "face",
-      "hair",
-      "bus"
-    ],
-    "correct": "face"
-  },
-  {
-    "subject": "Boy",
-    "action": "brush",
-    "sentence": "I brush my teeth before I sleep.",
-    "question": "What does he brush?",
+    "sentence": "Every morning, I wash my face and brush my teeth.",
+    "question": "What do I brush in the morning?",
+    "ttsPrompt": "Every morning, I wash my face and brush my teeth. What do I brush?",
     "options": [
       "teeth",
       "bag",
@@ -527,28 +501,48 @@ const ANIMAL_ACTION_QUESTIONS = [
     "correct": "teeth"
   },
   {
-    "subject": "Kid",
-    "action": "walk",
-    "sentence": "He can walk to school.",
-    "question": "What can he do?",
+    "sentence": "I eat delicious breakfast before I take the bus.",
+    "question": "What do I take to school?",
+    "ttsPrompt": "I eat delicious breakfast before I take the bus. What do I take?",
     "options": [
-      "walk",
-      "fly",
-      "swim"
+      "bus",
+      "box",
+      "truck"
     ],
-    "correct": "walk"
+    "correct": "bus"
   },
   {
-    "subject": "Duck",
-    "action": "swim",
-    "sentence": "The duck can swim in the water.",
-    "question": "What can the duck do?",
+    "sentence": "Before I sleep, I pack my school bag.",
+    "question": "What do I pack before sleep?",
+    "ttsPrompt": "Before I sleep, I pack my school bag. What do I pack?",
     "options": [
-      "swim",
-      "run",
-      "jump"
+      "bag",
+      "net",
+      "box"
     ],
-    "correct": "swim"
+    "correct": "bag"
+  },
+  {
+    "sentence": "This is my daily routine. I go to bed at night.",
+    "question": "Where do I sleep at night?",
+    "ttsPrompt": "This is my daily routine. I go to bed at night. Where do I sleep?",
+    "options": [
+      "bed",
+      "bus",
+      "top"
+    ],
+    "correct": "bed"
+  },
+  {
+    "sentence": "In the morning, I drink a glass of fresh milk.",
+    "question": "What do I drink in the morning?",
+    "ttsPrompt": "In the morning, I drink a glass of fresh milk. What do I drink?",
+    "options": [
+      "milk",
+      "egg",
+      "apple"
+    ],
+    "correct": "milk"
   }
 ];
 
@@ -643,35 +637,17 @@ class QuestionGenerator {
 
   static generateEndlessQuestion(stepIndex = 1) {
     const modes = ["LISTEN_HOP", "BEGINNING_SOUNDS", "ANIMAL_ACTIONS"];
-    const mode = modes[stepIndex % modes.length];
-
-    if (mode === "BEGINNING_SOUNDS") {
-      return this.generatePhonicsQuestion();
-    } else if (mode === "ANIMAL_ACTIONS") {
-      return this.generateActionQuestion();
-    } else {
-      return this.generateListenQuestion();
-    }
+    const mode = modes[(stepIndex - 1) % modes.length];
+    if (mode === "LISTEN_HOP") return this.generateListenQuestion();
+    if (mode === "BEGINNING_SOUNDS") return this.generatePhonicsQuestion();
+    return this.generateActionQuestion();
   }
 }
 
-// 相容全域變數
 if (typeof window !== "undefined") {
   window.P1_VOCABULARY = P2_VOCABULARY;
   window.P2_VOCABULARY = P2_VOCABULARY;
   window.PHONICS_GROUPS = PHONICS_GROUPS;
   window.ANIMAL_ACTION_QUESTIONS = ANIMAL_ACTION_QUESTIONS;
-  window.VOCAB_MAP = VOCAB_MAP;
   window.QuestionGenerator = QuestionGenerator;
-}
-
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = {
-    P1_VOCABULARY: P2_VOCABULARY,
-    P2_VOCABULARY,
-    PHONICS_GROUPS,
-    ANIMAL_ACTION_QUESTIONS,
-    VOCAB_MAP,
-    QuestionGenerator
-  };
 }
