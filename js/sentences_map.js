@@ -1,4 +1,4 @@
-{
+window.SENTENCES_AUDIO_MAP = {
   "Letter Bb. Sound b. Find the word that starts with Bb.": "assets/audios/sentences/frog_prompt_bb.mp3",
   "Letter Bb. Sound /b/. Find the word that starts with Bb.": "assets/audios/sentences/frog_prompt_bb.mp3",
   "Letter Bb. Find the word that starts with Bb": "assets/audios/sentences/frog_intro_bb.mp3",
@@ -21,4 +21,4 @@
   "This is my daily routine. I go to bed at night. Where do I sleep at night?": "assets/audios/sentences/frog_act_31948c6d.mp3",
   "What do I drink in the morning? In the morning, I drink a glass of fresh milk.": "assets/audios/sentences/frog_act_3f87c3a3.mp3",
   "In the morning, I drink a glass of fresh milk. What do I drink in the morning?": "assets/audios/sentences/frog_act_3f87c3a3.mp3"
-}
+};
